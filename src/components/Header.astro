@@ -1,0 +1,159 @@
+<header class="header">
+	<div class="container">
+		<div class="left">
+			<h1>Para nosotros</h1>
+		</div>
+		<div class="right">
+			<span class="date">05/29/25</span>
+			<a href="#">Canciones</a>
+			<a href="#">Memorias</a>
+		</div>
+	</div>
+	<img src="/public/rose.png" alt="Rosa decorativa" class="rose" />
+
+	<!-- Corazones decorativos -->
+	<div class="heart heart1">❤️</div>
+	<div class="heart heart2">❤️</div>
+</header>
+
+<style>
+	.header {
+		background: linear-gradient(to right, #ffe6e6, #fff0f5);
+		padding: 1.5rem 0 2rem 0;
+		position: relative;
+		overflow: hidden;
+		box-shadow: 0 4px 12px rgba(255, 153, 153, 0.2);
+		border-bottom: 5px dashed #ffcccc;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 1rem;
+		/* display: flex; */
+		align-items: center;
+		justify-content: space-between;
+		position: relative;
+		z-index: 1;
+	}
+
+	.left h1 {
+		font-family: "Pacifico", cursive;
+		font-size: 4.5rem;
+		color: #b3003c;
+		text-shadow: 3px 3px #f8b6c1;
+		margin: 4px 0;
+	}
+
+	.right {
+		display: flex;
+		align-items: center;
+		gap: 1.5rem;
+	}
+
+	.right .date {
+		font-family: "Open Sans", sans-serif;
+		font-weight: 600;
+		color: #990033;
+		font-size: 1.5rem;
+	}
+
+	.right a {
+		font-family: "Open Sans", sans-serif;
+		text-decoration: none;
+		color: #990033;
+		font-weight: 400;
+		transition: color 0.3s;
+		font-size: 1.5rem;
+	}
+
+	.right a:hover {
+		color: #ff3366;
+	}
+
+	/* Imagen de rosa animada */
+	.rose {
+		position: absolute;
+		top: 0;
+		right: 0;
+		height: 100%;
+		max-height: 180px;
+		object-fit: contain;
+		z-index: 0;
+		opacity: 0.9;
+		animation: float 8s ease-in-out infinite;
+	}
+
+	@keyframes float {
+		0%,
+		100% {
+			transform: translateY(0) rotate(0deg);
+		}
+		50% {
+			transform: translateY(-5px) rotate(1deg);
+		}
+	}
+
+	/* Corazones flotantes */
+	.heart {
+		position: absolute;
+		font-size: 1.5rem;
+		opacity: 0.4;
+		animation: floatHeart 6s ease-in-out infinite;
+		user-select: none;
+		pointer-events: none;
+	}
+
+	.heart1 {
+		top: 10px;
+		left: 20px;
+		animation-delay: 0s;
+	}
+
+	.heart2 {
+		bottom: 10px;
+		right: 20px;
+		animation-delay: 3s;
+	}
+
+	@keyframes floatHeart {
+		0%,
+		100% {
+			transform: translateY(0) scale(1);
+		}
+		50% {
+			transform: translateY(-8px) scale(1.1);
+		}
+	}
+
+	/* Responsivo */
+	@media (max-width: 768px) {
+		.container {
+			flex-direction: column;
+			gap: 0.5rem;
+			text-align: center;
+		}
+
+		.right {
+			flex-direction: column;
+			gap: 0.5rem;
+		}
+
+		.right .date a {
+			font-size: 1rem;
+		}
+
+		.left h1 {
+			font-size: 2.8rem;
+		}
+
+		.rose {
+			max-height: 110px;
+			opacity: 0.8;
+		}
+
+		.heart {
+			font-size: 1.2rem;
+		}
+	}
+</style>
