@@ -1,3 +1,7 @@
+---
+import heartIcon from "../../public/heart.png";
+---
+
 <header class="header">
 	<div class="container">
 		<div class="left">
@@ -12,11 +16,33 @@
 	<img src="/public/rose.png" alt="Rosa decorativa" class="rose" />
 
 	<!-- Corazones decorativos -->
-	<div class="heart heart1">❤️</div>
-	<div class="heart heart2">❤️</div>
+	<img src="heart.png" alt="Corazón decorativo" class="heart heart1" />
+	<img src="heart.png" alt="Corazón decorativo" class="heart heart2" />
 </header>
 
 <style>
+	.heart {
+		position: absolute;
+		width: 40px;
+		height: 40px;
+		opacity: 0.4;
+		animation: floatHeart 6s ease-in-out infinite;
+		user-select: none;
+		pointer-events: none;
+	}
+
+	.heart1 {
+		top: 10px;
+		left: 20px;
+		animation-delay: 0s;
+	}
+
+	.heart2 {
+		bottom: 10px;
+		right: 20px;
+		animation-delay: 3s;
+	}
+
 	.header {
 		background: linear-gradient(to right, #ffe6e6, #fff0f5);
 		padding: 1.5rem 0 2rem 0;

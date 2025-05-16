@@ -9,6 +9,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.7.13"
+    "astro": "^5.7.13",
+    "react-tsparticles": "^2.12.2",
+    "tsparticles": "^3.8.1"
   }
 }

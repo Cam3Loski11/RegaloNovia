@@ -1,0 +1,58 @@
+---
+import { loadFull } from "tsparticles";
+---
+
+<!-- Cambiado a 'fixed' y width/height 100% siempre visible -->
+<div
+	id="tsparticles"
+	style="position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0;"
+>
+</div>
+
+<script type="module">
+	import { tsParticles } from "https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.0.3/+esm";
+	import { loadFull } from "https://cdn.jsdelivr.net/npm/tsparticles@3.0.3/+esm";
+
+	async function loadParticles(options) {
+		await loadFull(tsParticles);
+		await tsParticles.load({ options });
+	}
+
+	const configs = {
+		particles: {
+			move: {
+				enable: true,
+				speed: { min: 0.5, max: 2 },
+			},
+			number: {
+				value: 20,
+				max: 30,
+			},
+			opacity: {
+				value: 0.6,
+			},
+			rotate: {
+				path: true,
+			},
+			shape: {
+				options: {
+					image: {
+						gif: true,
+						height: 200,
+						src: "../../public/bear1-removebg-preview.png",
+						width: 200,
+					},
+				},
+				type: "image",
+			},
+			size: {
+				value: {
+					min: 16,
+					max: 32,
+				},
+			},
+		},
+	};
+
+	loadParticles(configs);
+</script>
