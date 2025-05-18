@@ -1,3 +1,4 @@
+/* src/components/RomanticSwiper.css */
 .my-romantic-swiper {
 	width: 100%;
 	max-width: 900px;
@@ -16,23 +17,23 @@
 	transition: transform 1s ease;
 }
 
-/* Escala suave solo para la activa */
 .swiper-slide-active .slide-image {
 	transform: scale(1.02);
 }
 
-/* Responsive para pantallas pequeñas */
 @media (max-width: 768px) {
 	.slide-image {
 		max-height: 300px;
+		max-width: 300px;
 	}
 
 	.my-romantic-swiper {
 		padding: 1rem 0.5rem;
+		max-height: 300px;
+		max-width: 300px;
 	}
 }
 
-/* Responsive aún más pequeño (teléfonos) */
 @media (max-width: 480px) {
 	.slide-image {
 		max-height: 250px;

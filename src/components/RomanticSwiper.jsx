@@ -23,7 +23,7 @@ export default function RomanticSwiper() {
     <Swiper
       modules={[Autoplay, Pagination, EffectFade]}
       effect="fade"
-      autoplay={{ delay: 5000, disableOnInteraction: false }}
+      autoplay={{ delay: 9000, disableOnInteraction: false }}
       pagination={{ clickable: true }}
       loop={true}
       slidesPerView={1}
