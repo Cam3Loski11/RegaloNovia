@@ -1,0 +1,41 @@
+.my-romantic-swiper {
+	width: 100%;
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 2rem 1rem;
+}
+
+.slide-image {
+	width: 100%;
+	height: auto;
+	max-height: 500px;
+	object-fit: cover;
+	border-radius: 1rem;
+	box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
+	filter: brightness(0.95);
+	transition: transform 1s ease;
+}
+
+/* Escala suave solo para la activa */
+.swiper-slide-active .slide-image {
+	transform: scale(1.02);
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+	.slide-image {
+		max-height: 300px;
+	}
+
+	.my-romantic-swiper {
+		padding: 1rem 0.5rem;
+	}
+}
+
+/* Responsive aún más pequeño (teléfonos) */
+@media (max-width: 480px) {
+	.slide-image {
+		max-height: 250px;
+		border-radius: 0.75rem;
+	}
+}
