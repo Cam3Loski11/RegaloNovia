@@ -1,0 +1,54 @@
+/* src/components/BirthdayMessage.css */
+
+.birthday-card {
+	max-width: 800px;
+	margin: 2rem auto;
+	background: linear-gradient(145deg, #fff0f5, #ffe4e1);
+	padding: 2rem;
+	border-radius: 1.5rem;
+	box-shadow: 0 12px 25px rgba(255, 105, 180, 0.25);
+	text-align: center;
+	font-family: "Dancing Script", cursive;
+	color: #a83263;
+	position: relative;
+	overflow: hidden;
+	animation: fadeInUp 1.5s ease;
+}
+
+.card-decor {
+	font-size: 1.5rem;
+}
+
+.top-decor {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+}
+
+.bottom-decor {
+	position: absolute;
+	bottom: 1rem;
+	right: 1rem;
+}
+
+.card-message h2 {
+	font-size: 2.5rem;
+	margin-bottom: 1rem;
+}
+
+.card-message p {
+	font-size: 1.3rem;
+	line-height: 1.7;
+	margin: 1rem 0;
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
