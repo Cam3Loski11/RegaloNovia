@@ -1,24 +1,32 @@
-// src/components/BirthdayMessage.jsx
-import React from "react";
+import React, { useState } from "react";
 import "./BirthdayMessage.css";
 
 export default function BirthdayMessage() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleCardClick = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <div className="birthday-card">
-      <div className="card-decor top-decor">🌸🌷💖</div>
-      <div className="card-message">
-        <h2>Feliz cumpleaños, mi amor 💕</h2>
-        <p>
-          Hoy celebramos algo más que un año más en tu vida. Celebramos tu sonrisa, tu ternura, tu corazón inmenso y todo lo que eres. Eres la persona más especial que he conocido, y cada día a tu lado se siente como un regalo que no merezco.
-        </p>
-        <p>
-          Gracias por tu paciencia, por tu amor, por tu luz. Deseo que este día te haga sentir tan amada como me haces sentir a mí todos los días. Que rías mucho, que sueñes más, y que nunca te falte amor, porque yo te daré el mío siempre.
-        </p>
-        <p>
-          Feliz cumpleaños, princesa. 💗 Te amo con todo mi corazón.
-        </p>
+    <div className="card-container" onClick={handleCardClick}>
+      <div className={`card ${isOpen ? "open" : ""}`}>
+        <div className="card-front">
+          <h2>Para mi amorcito 💌</h2>
+          <p>Haz clic aquí para abrir tu cartita...</p>
+        </div>
+        <div className="card-inside">
+          <h3>¡Feliz cumpleaños, mi vida! 🎉</h3>
+          <p>
+            Hoy es un día muy especial porque celebramos tu vida. Gracias por
+            iluminar mis días con tu sonrisa, tu amor y tu ternura. Estoy tan
+            feliz de tenerte en mi vida. Te mereces todo lo hermoso que este
+            mundo tiene para ofrecerte. Espero que esta pequeña sorpresa te
+            saque una sonrisa, como tú me las sacas a mí todos los días.
+          </p>
+          <p>Te amo con todo mi corazón ❤️</p>
+        </div>
       </div>
-      <div className="card-decor bottom-decor">💖🌸🌷</div>
     </div>
   );
 }

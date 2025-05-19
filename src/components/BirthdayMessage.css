@@ -1,54 +1,80 @@
-/* src/components/BirthdayMessage.css */
+.card-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin: 0;
+	padding: 2rem 1rem;
+	perspective: 2000px;
+	cursor: pointer;
+}
 
-.birthday-card {
-	max-width: 800px;
-	margin: 2rem auto;
-	background: linear-gradient(145deg, #fff0f5, #ffe4e1);
-	padding: 2rem;
-	border-radius: 1.5rem;
-	box-shadow: 0 12px 25px rgba(255, 105, 180, 0.25);
-	text-align: center;
-	font-family: "Dancing Script", cursive;
-	color: #a83263;
+.card {
+	display: flex;
+	width: 100%;
+	max-width: 900px;
+	height: 400px;
 	position: relative;
-	overflow: hidden;
-	animation: fadeInUp 1.5s ease;
+	transform-style: preserve-3d;
+	transition: transform 1.2s ease;
+	justify-content: center;
+	margin: 0px 0px 30px 0;
 }
 
-.card-decor {
-	font-size: 1.5rem;
+.card.open {
+	transform: rotateY(180deg);
 }
 
-.top-decor {
+.card-front,
+.card-inside {
 	position: absolute;
-	top: 1rem;
-	left: 1rem;
+	width: 100%;
+	height: 100%;
+	backface-visibility: hidden;
+	border-radius: 1rem;
+	box-shadow: 0 8px 30px rgba(255, 105, 180, 0.3);
+	padding: 2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	font-family: "Dancing Script", cursive;
+	background: linear-gradient(135deg, #ffe4e1, #fff0f5);
+	color: #333;
 }
 
-.bottom-decor {
-	position: absolute;
-	bottom: 1rem;
-	right: 1rem;
+.card-front {
+	text-align: center;
 }
 
-.card-message h2 {
-	font-size: 2.5rem;
+.card-inside {
+	transform: rotateY(180deg);
+	text-align: left;
+}
+
+.card-inside h3 {
 	margin-bottom: 1rem;
+	color: #ff69b4;
 }
 
-.card-message p {
-	font-size: 1.3rem;
-	line-height: 1.7;
-	margin: 1rem 0;
-}
-
-@keyframes fadeInUp {
-	from {
-		opacity: 0;
-		transform: translateY(30px);
+/* Responsive behavior */
+@media (max-width: 768px) {
+	.card {
+		height: 300px;
 	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
+
+	.card-inside,
+	.card-front {
+		padding: 1rem;
+		font-size: 0.95rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.card {
+		height: 280px;
+	}
+
+	.card-inside p {
+		font-size: 0.9rem;
 	}
 }
