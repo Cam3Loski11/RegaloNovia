@@ -23,7 +23,6 @@ import RomanticSwiper from "./RomanticSwiper";
 
 		.side-border {
 			width: 40px;
-			height: calc(100vh - 80px); /* Ajusta según la altura del header */
 			background-image: url("/flower-border.png");
 			background-repeat: repeat-y;
 			background-size: contain;
@@ -33,6 +32,9 @@ import RomanticSwiper from "./RomanticSwiper";
 		}
 
 		.content {
+			display: flex;
+			justify-content: center;
+			align-items: center;
 			flex: 1;
 			min-height: 100%;
 			position: relative;

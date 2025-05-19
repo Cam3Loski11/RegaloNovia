@@ -2,6 +2,8 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, EffectFade } from "swiper/modules";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons"; // ícono de corazón
 
 import "swiper/css";
 import "swiper/css/autoplay";
@@ -20,21 +22,26 @@ const images = [
 
 export default function RomanticSwiper() {
   return (
-    <Swiper
-      modules={[Autoplay, Pagination, EffectFade]}
-      effect="fade"
-      autoplay={{ delay: 9000, disableOnInteraction: false }}
-      pagination={{ clickable: true }}
-      loop={true}
-      slidesPerView={1}
-      spaceBetween={0}
-      className="my-romantic-swiper"
-    >
-      {images.map((src, index) => (
-        <SwiperSlide key={`slide-${index}`}>
-          <img src={src} alt={`Imagen ${index + 1}`} className="slide-image" />
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <div className="romantic-swiper-container">
+      <div className="icon-container">
+        <FontAwesomeIcon icon={faHeart} className="heart-icon" />
+      </div>
+      <Swiper
+        modules={[Autoplay, Pagination, EffectFade]}
+        effect="fade"
+        autoplay={{ delay: 9000, disableOnInteraction: false }}
+        pagination={{ clickable: true, dynamicBullets: true }}
+        loop={true}
+        slidesPerView={1}
+        spaceBetween={0}
+        className="my-romantic-swiper"
+      >
+        {images.map((src, index) => (
+          <SwiperSlide key={`slide-${index}`}>
+            <img src={src} alt={`Imagen ${index + 1}`} className="slide-image" />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   );
 }
