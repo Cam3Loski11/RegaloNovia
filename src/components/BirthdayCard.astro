@@ -1,0 +1,300 @@
+<div class="letter-image">
+	<div class="animated-mail">
+		<div class="back-fold"></div>
+		<div class="letter">
+			<div class="letter-border"></div>
+			<div class="letter-content">
+				<h2>Para Nosotros</h2>
+				<p>Mi amor,</p>
+				<p>
+					Quiero aprovechar esta pequeña carta para expresarte todo lo que
+					siento por ti. Desde que te conocí, mi vida ha sido un constante
+					descubrimiento de nuevas emociones y alegrías.
+				</p>
+				<p>
+					Cada momento compartido, cada sonrisa, cada mirada... todo se ha
+					convertido en recuerdos que atesoro con todo mi corazón.
+				</p>
+				<p>
+					Nuestras canciones favoritas, esas que nos hacen recordar momentos
+					especiales, y todas las memorias que hemos creado juntos, son el mejor
+					regalo que la vida me ha dado.
+				</p>
+				<p>
+					Quiero seguir construyendo más recuerdos a tu lado, seguir
+					descubriendo el mundo contigo y enfrentar juntos todo lo que venga.
+				</p>
+				<p>
+					Gracias por ser exactamente quien eres y por permitirme ser parte de
+					tu vida.
+				</p>
+				<p class="signature">Con todo mi amor</p>
+			</div>
+			<div class="letter-stamp">
+				<div class="letter-stamp-inner">❤️</div>
+			</div>
+		</div>
+		<div class="top-fold"></div>
+		<div class="body"></div>
+		<div class="left-fold"></div>
+	</div>
+	<div class="shadow"></div>
+</div>
+
+<style>
+	body {
+		background: #fff5f7;
+	}
+
+	.letter-image {
+		position: relative;
+		margin: 50px auto;
+		width: 100%;
+		max-width: 450px;
+		height: 380px;
+		cursor: pointer;
+	}
+
+	.animated-mail {
+		position: absolute;
+		height: 320px;
+		width: 450px;
+		transition: 0.4s;
+		z-index: 1;
+	}
+
+	.animated-mail .body {
+		position: absolute;
+		bottom: 0;
+		width: 0;
+		height: 0;
+		border-style: solid;
+		border-width: 0 0 200px 450px;
+		border-color: transparent transparent #ff7b95 transparent;
+		z-index: 2;
+	}
+
+	.animated-mail .top-fold {
+		position: absolute;
+		top: 132px;
+		width: 0;
+		height: 0;
+		border-style: solid;
+		border-width: 90px 225px 0 225px;
+		transform-origin: 50% 0%;
+		transition:
+			transform 0.4s 0.4s,
+			z-index 0.2s 0.4s;
+		border-color: #ff5983 transparent transparent transparent;
+		z-index: 2;
+	}
+
+	.animated-mail .back-fold {
+		position: absolute;
+		bottom: 0;
+		width: 450px;
+		height: 200px;
+		background: #ff5983;
+		z-index: 0;
+	}
+
+	.animated-mail .left-fold {
+		position: absolute;
+		bottom: 0;
+		width: 0;
+		height: 0;
+		border-style: solid;
+		border-width: 100px 0 100px 225px;
+		border-color: transparent transparent transparent #ff7b95;
+		z-index: 2;
+	}
+
+	.animated-mail .letter {
+		left: 45px;
+		top: 180px;
+		position: absolute;
+		width: 360px;
+		height: 80px;
+		background: white;
+		z-index: 1;
+		overflow: hidden;
+		transition: all 0.4s 0.2s;
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+		border-radius: 3px 3px 0 0;
+		transform-origin: bottom center;
+	}
+
+	.animated-mail .letter .letter-border {
+		height: 12px;
+		width: 100%;
+		background: repeating-linear-gradient(
+			-45deg,
+			#ff9bb2,
+			#ff9bb2 8px,
+			#fff0f5 8px,
+			#fff0f5 18px
+		);
+	}
+
+	.animated-mail .letter .letter-content {
+		padding: 20px;
+		font-size: 16px;
+		max-height: 480px;
+		overflow-y: auto;
+	}
+
+	.animated-mail .letter .letter-content h2 {
+		font-size: 26px;
+		margin-bottom: 15px;
+		color: #ff5983;
+		text-align: center;
+		font-weight: 600;
+	}
+
+	.animated-mail .letter .letter-content p {
+		font-size: 16px;
+		margin-bottom: 12px;
+		line-height: 1.6;
+		color: #666;
+	}
+
+	.animated-mail .letter .letter-content .signature {
+		font-style: italic;
+		text-align: right;
+		margin-top: 20px;
+		color: #ff5983;
+		font-weight: 500;
+	}
+
+	.animated-mail .letter .letter-stamp {
+		position: absolute;
+		bottom: 20px;
+		right: 20px;
+		border-radius: 100%;
+		height: 50px;
+		width: 50px;
+		background: linear-gradient(45deg, #ff5983, #ff9bb2);
+		opacity: 0.8;
+	}
+
+	.shadow {
+		position: absolute;
+		top: 380px;
+		left: 50%;
+		width: 520px;
+		height: 35px;
+		transition: 0.4s;
+		transform: translateX(-50%);
+		border-radius: 100%;
+		background: radial-gradient(
+			rgba(0, 0, 0, 0.3),
+			rgba(0, 0, 0, 0),
+			rgba(0, 0, 0, 0)
+		);
+	}
+
+	.letter-image.active .animated-mail {
+		transform: translateY(50px);
+	}
+
+	.letter-image.active .animated-mail .top-fold {
+		transform: rotateX(180deg);
+		z-index: 0;
+	}
+
+	.letter-image.active .animated-mail .letter {
+		height: auto;
+		transform: translateY(-350px);
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+		z-index: 9;
+	}
+
+	.letter-image.active .shadow {
+		width: 450px;
+	}
+
+	.letter-stamp-inner {
+		position: absolute;
+		top: 14px;
+		right: 14px;
+	}
+
+	/* Responsivo también puede actualizarse si lo deseas */
+
+	/* Estilos responsivos */
+	@media (max-width: 480px) {
+		.letter-image {
+			max-width: 300px;
+			height: 250px;
+		}
+
+		.animated-mail {
+			height: 200px;
+			width: 300px;
+		}
+
+		.animated-mail .body {
+			border-width: 0 0 130px 300px;
+		}
+
+		.animated-mail .top-fold {
+			top: 70px;
+			border-width: 65px 150px 0 150px;
+		}
+
+		.animated-mail .back-fold {
+			width: 300px;
+			height: 130px;
+		}
+
+		.animated-mail .left-fold {
+			border-width: 65px 0 65px 150px;
+		}
+
+		.animated-mail .letter {
+			left: 30px;
+			width: 240px;
+			top: 75px;
+		}
+
+		.letter-image.active .animated-mail .letter {
+			height: 300px;
+			transform: translateY(-250px);
+		}
+
+		.shadow {
+			top: 250px;
+			width: 380px;
+		}
+
+		.letter-image.active .shadow {
+			width: 300px;
+		}
+	}
+</style>
+
+<script>
+	// Script para manejar el clic en la carta
+	document.addEventListener("DOMContentLoaded", () => {
+		const letterImage = document.querySelector(".letter-image");
+		let isOpen = false;
+
+		letterImage.addEventListener("click", () => {
+			letterImage.classList.toggle("active");
+
+			// Añadir un pequeño retraso para la animación de entrada
+			if (!isOpen) {
+				setTimeout(() => {
+					document.querySelector(".animated-mail .letter").style.transition =
+						"all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+				}, 100);
+			} else {
+				// Retrasar el cierre para dar tiempo a la carta a volver primero
+				document.querySelector(".animated-mail .letter").style.transition =
+					"all 0.4s 0.2s";
+			}
+
+			isOpen = !isOpen;
+		});
+	});
+</script>

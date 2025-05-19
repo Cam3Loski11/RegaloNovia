@@ -2,6 +2,7 @@
 import Particles from "./Particles.astro";
 import RomanticSwiper from "./RomanticSwiper";
 import BirthdayMessage from "./BirthdayMessage.jsx";
+import BirthdayCard from "./BirthdayCard.astro";
 ---
 
 <div id="container">
@@ -11,7 +12,8 @@ import BirthdayMessage from "./BirthdayMessage.jsx";
 		<div class="content">
 			<Particles />
 			<RomanticSwiper client:load />
-			<BirthdayMessage client:load />
+			<!-- <BirthdayMessage client:load /> -->
+			<BirthdayCard />
 		</div>
 		<div class="side-border"></div>
 	</div>
@@ -36,7 +38,6 @@ import BirthdayMessage from "./BirthdayMessage.jsx";
 		.content {
 			display: flex;
 			justify-content: center;
-			align-items: center;
 			flex-direction: column;
 			flex: 1;
 			min-height: 100%;
