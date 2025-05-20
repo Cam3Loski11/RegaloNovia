@@ -29,6 +29,9 @@
 					tu vida.
 				</p>
 				<p class="signature">Con todo mi amor</p>
+				<div class="decorative-hearts">
+					<span>♥</span><span>♥</span><span>♥</span>
+				</div>
 			</div>
 			<div class="letter-stamp">
 				<div class="letter-stamp-inner">❤️</div>
@@ -37,6 +40,12 @@
 		<div class="top-fold"></div>
 		<div class="body"></div>
 		<div class="left-fold"></div>
+		<div class="seal">Ábreme</div>
+		<div class="decorative-hearts-envelope">
+			<div class="heart-1">♥</div>
+			<div class="heart-2">♥</div>
+			<div class="heart-3">♥</div>
+		</div>
 	</div>
 	<div class="shadow"></div>
 </div>
@@ -44,21 +53,22 @@
 <style>
 	body {
 		background: #fff5f7;
+		font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 	}
 
 	.letter-image {
 		position: relative;
-		margin: 50px auto;
+		margin: 80px auto;
 		width: 100%;
-		max-width: 450px;
-		height: 380px;
+		max-width: 600px;
+		height: 460px;
 		cursor: pointer;
 	}
 
 	.animated-mail {
 		position: absolute;
-		height: 320px;
-		width: 450px;
+		height: 400px;
+		width: 600px;
 		transition: 0.4s;
 		z-index: 1;
 	}
@@ -69,33 +79,37 @@
 		width: 0;
 		height: 0;
 		border-style: solid;
-		border-width: 0 0 200px 450px;
+		border-width: 0 0 250px 600px;
 		border-color: transparent transparent #ff7b95 transparent;
 		z-index: 2;
+		background: linear-gradient(135deg, #ff7b95 0%, #ff5983 100%);
 	}
 
 	.animated-mail .top-fold {
 		position: absolute;
-		top: 132px;
+		top: 165px;
 		width: 0;
 		height: 0;
 		border-style: solid;
-		border-width: 90px 225px 0 225px;
+		border-width: 112px 300px 0 300px;
 		transform-origin: 50% 0%;
 		transition:
 			transform 0.4s 0.4s,
 			z-index 0.2s 0.4s;
 		border-color: #ff5983 transparent transparent transparent;
 		z-index: 2;
+		background: linear-gradient(180deg, #ff5983 0%, #ff7b95 100%);
 	}
 
 	.animated-mail .back-fold {
 		position: absolute;
 		bottom: 0;
-		width: 450px;
-		height: 200px;
+		width: 600px;
+		height: 250px;
 		background: #ff5983;
 		z-index: 0;
+		background: linear-gradient(135deg, #ff5983 0%, #ff7b95 100%);
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1) inset;
 	}
 
 	.animated-mail .left-fold {
@@ -104,28 +118,28 @@
 		width: 0;
 		height: 0;
 		border-style: solid;
-		border-width: 100px 0 100px 225px;
+		border-width: 125px 0 125px 300px;
 		border-color: transparent transparent transparent #ff7b95;
 		z-index: 2;
 	}
 
 	.animated-mail .letter {
-		left: 45px;
-		top: 180px;
+		left: 60px;
+		top: 220px;
 		position: absolute;
-		width: 360px;
+		width: 480px;
 		height: 80px;
 		background: white;
 		z-index: 1;
 		overflow: hidden;
 		transition: all 0.4s 0.2s;
-		box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-		border-radius: 3px 3px 0 0;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		border-radius: 5px 5px 0 0;
 		transform-origin: bottom center;
 	}
 
 	.animated-mail .letter .letter-border {
-		height: 12px;
+		height: 15px;
 		width: 100%;
 		background: repeating-linear-gradient(
 			-45deg,
@@ -137,138 +151,265 @@
 	}
 
 	.animated-mail .letter .letter-content {
-		padding: 20px;
-		font-size: 16px;
-		max-height: 480px;
+		padding: 30px;
+		font-size: 18px;
+		max-height: 580px;
 		overflow-y: auto;
+		background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffcad4' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
 	}
 
 	.animated-mail .letter .letter-content h2 {
-		font-size: 26px;
-		margin-bottom: 15px;
+		font-size: 32px;
+		margin-bottom: 20px;
 		color: #ff5983;
 		text-align: center;
 		font-weight: 600;
+		font-family: "Brush Script MT", cursive;
+		text-shadow: 1px 1px 2px rgba(255, 89, 131, 0.2);
 	}
 
 	.animated-mail .letter .letter-content p {
-		font-size: 16px;
-		margin-bottom: 12px;
-		line-height: 1.6;
-		color: #666;
+		font-size: 18px;
+		margin-bottom: 15px;
+		line-height: 1.8;
+		color: #555;
 	}
 
 	.animated-mail .letter .letter-content .signature {
 		font-style: italic;
 		text-align: right;
-		margin-top: 20px;
+		margin-top: 30px;
 		color: #ff5983;
 		font-weight: 500;
+		font-size: 22px;
+		font-family: "Brush Script MT", cursive;
 	}
 
 	.animated-mail .letter .letter-stamp {
 		position: absolute;
-		bottom: 20px;
-		right: 20px;
+		bottom: 56px;
+		left: 40px;
 		border-radius: 100%;
-		height: 50px;
-		width: 50px;
+		height: 60px;
+		width: 60px;
 		background: linear-gradient(45deg, #ff5983, #ff9bb2);
 		opacity: 0.8;
+		box-shadow: 0 2px 10px rgba(255, 89, 131, 0.4);
 	}
 
 	.shadow {
 		position: absolute;
-		top: 380px;
+		top: 480px;
 		left: 50%;
-		width: 520px;
-		height: 35px;
+		width: 650px;
+		height: 40px;
 		transition: 0.4s;
 		transform: translateX(-50%);
 		border-radius: 100%;
 		background: radial-gradient(
-			rgba(0, 0, 0, 0.3),
+			rgba(0, 0, 0, 0.25),
 			rgba(0, 0, 0, 0),
 			rgba(0, 0, 0, 0)
 		);
 	}
 
 	.letter-image.active .animated-mail {
-		transform: translateY(50px);
+		transform: translateY(70px);
 	}
 
 	.letter-image.active .animated-mail .top-fold {
 		transform: rotateX(180deg);
 		z-index: 0;
+		transition:
+			transform 0.6s ease,
+			z-index 0.6s;
 	}
 
 	.letter-image.active .animated-mail .letter {
-		height: auto;
-		transform: translateY(-350px);
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+		height: 680px;
+		transform: translateY(-450px);
+		box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 		z-index: 9;
 	}
 
 	.letter-image.active .shadow {
-		width: 450px;
+		width: 550px;
 	}
 
 	.letter-stamp-inner {
 		position: absolute;
 		top: 14px;
 		right: 14px;
+		font-size: 24px;
 	}
 
-	/* Responsivo también puede actualizarse si lo deseas */
+	.decorative-hearts {
+		text-align: center;
+		margin-top: 30px;
+		color: #ff7b95;
+		font-size: 16px;
+		letter-spacing: 10px;
+	}
+
+	.decorative-hearts-envelope {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		z-index: 3;
+		pointer-events: none;
+	}
+
+	.decorative-hearts-envelope .heart-1,
+	.decorative-hearts-envelope .heart-2,
+	.decorative-hearts-envelope .heart-3 {
+		position: absolute;
+		color: rgba(255, 255, 255, 0.4);
+		font-size: 22px;
+	}
+
+	.decorative-hearts-envelope .heart-1 {
+		top: 368px;
+		left: 8px;
+	}
+
+	.decorative-hearts-envelope .heart-2 {
+		top: 368px;
+		right: 8px;
+	}
+
+	.decorative-hearts-envelope .heart-3 {
+		top: 368px;
+		right: 290px;
+	}
+
+	.seal {
+		position: absolute;
+		top: 230px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 120px;
+		height: 60px;
+		background: #ff5983;
+		color: white;
+		text-align: center;
+		line-height: 60px;
+		font-size: 22px;
+		font-weight: bold;
+		border-radius: 30px;
+		z-index: 5;
+		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+		opacity: 1;
+		transition: opacity 0.3s ease;
+	}
+
+	.letter-image.active .seal {
+		opacity: 0;
+	}
+
+	/* Efectos de brillo */
+	.animated-mail:before {
+		content: "";
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: linear-gradient(
+			135deg,
+			rgba(255, 255, 255, 0.1) 0%,
+			rgba(255, 255, 255, 0) 50%
+		);
+		z-index: 10;
+		pointer-events: none;
+	}
 
 	/* Estilos responsivos */
-	@media (max-width: 480px) {
+	@media (max-width: 650px) {
 		.letter-image {
-			max-width: 300px;
-			height: 250px;
+			max-width: 320px;
+			height: 280px;
 		}
 
 		.animated-mail {
-			height: 200px;
-			width: 300px;
+			height: 220px;
+			width: 320px;
 		}
 
 		.animated-mail .body {
-			border-width: 0 0 130px 300px;
+			border-width: 0 0 140px 320px;
 		}
 
 		.animated-mail .top-fold {
-			top: 70px;
-			border-width: 65px 150px 0 150px;
+			top: 80px;
+			border-width: 70px 160px 0 160px;
 		}
 
 		.animated-mail .back-fold {
-			width: 300px;
-			height: 130px;
+			width: 320px;
+			height: 140px;
 		}
 
 		.animated-mail .left-fold {
-			border-width: 65px 0 65px 150px;
+			border-width: 70px 0 70px 160px;
 		}
 
 		.animated-mail .letter {
 			left: 30px;
-			width: 240px;
-			top: 75px;
+			width: 260px;
+			top: 85px;
 		}
 
 		.letter-image.active .animated-mail .letter {
-			height: 300px;
-			transform: translateY(-250px);
+			height: 400px;
+			transform: translateY(-280px);
 		}
 
 		.shadow {
-			top: 250px;
+			top: 280px;
 			width: 380px;
 		}
 
 		.letter-image.active .shadow {
-			width: 300px;
+			width: 320px;
+		}
+
+		.animated-mail .letter .letter-content {
+			height: 320px;
+			padding: 20px;
+			font-size: 16px;
+		}
+
+		.animated-mail .letter .letter-content h2 {
+			font-size: 26px;
+		}
+
+		.animated-mail .letter .letter-content p {
+			font-size: 16px;
+		}
+
+		.seal {
+			width: 90px;
+			height: 45px;
+			line-height: 45px;
+			font-size: 18px;
+			top: 124px;
+		}
+		.animated-mail .letter .letter-stamp {
+			bottom: 20px;
+			left: 12px;
+		}
+		.decorative-hearts-envelope .heart-1 {
+			top: 190px;
+		}
+
+		.decorative-hearts-envelope .heart-2 {
+			top: 190px;
+			right: 8px;
+		}
+
+		.decorative-hearts-envelope .heart-3 {
+			top: 190px;
+			right: 155px;
 		}
 	}
 </style>
@@ -286,12 +427,12 @@
 			if (!isOpen) {
 				setTimeout(() => {
 					document.querySelector(".animated-mail .letter").style.transition =
-						"all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+						"all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
 				}, 100);
 			} else {
 				// Retrasar el cierre para dar tiempo a la carta a volver primero
 				document.querySelector(".animated-mail .letter").style.transition =
-					"all 0.4s 0.2s";
+					"all 0.5s 0.2s";
 			}
 
 			isOpen = !isOpen;
