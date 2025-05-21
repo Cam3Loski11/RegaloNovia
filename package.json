@@ -12,13 +12,16 @@
     "@astrojs/react": "^4.2.7",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@tailwindcss/vite": "^4.1.7",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
     "astro": "^5.7.13",
+    "canvas-confetti": "^1.9.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-tsparticles": "^2.12.2",
     "swiper": "^11.2.6",
+    "tailwindcss": "^4.1.7",
     "tsparticles": "^3.8.1"
   }
 }
