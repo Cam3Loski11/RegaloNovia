@@ -1,0 +1,26 @@
+.scroll-animate {
+	opacity: 0;
+	transform: translateY(30px);
+	transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-animate.animated {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.scroll-animate.fade-left {
+	transform: translateX(-30px);
+}
+
+.scroll-animate.fade-left.animated {
+	transform: translateX(0);
+}
+
+.scroll-animate.fade-right {
+	transform: translateX(30px);
+}
+
+.scroll-animate.fade-right.animated {
+	transform: translateX(0);
+}

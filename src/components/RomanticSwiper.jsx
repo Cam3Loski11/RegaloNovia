@@ -22,7 +22,7 @@ const images = [
 
 export default function RomanticSwiper() {
   return (
-    <div className="romantic-swiper-container">
+    <div className="romantic-swiper-container scroll-animate fade-right">
       <div className="icon-container">
         <FontAwesomeIcon icon={faHeart} className="heart-icon" />
       </div>

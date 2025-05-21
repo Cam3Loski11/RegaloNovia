@@ -1,5 +1,5 @@
 ---
-
+import '../styles/global.css';
 ---
 
 <!doctype html>
@@ -30,6 +30,14 @@
 	</head>
 	<body>
 		<slot />
+
+        <script>
+      import { setupScrollAnimations } from '../utils/scrollAnimation.js';
+      
+      document.addEventListener('DOMContentLoaded', function() {
+        setupScrollAnimations();
+      });
+    </script>
 	</body>
 </html>
 
