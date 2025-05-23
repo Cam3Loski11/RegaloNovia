@@ -1,7 +1,6 @@
 ---
 import Particles from "./Particles.astro";
 import RomanticSwiper from "./RomanticSwiper";
-import BirthdayMessage from "./BirthdayMessage.jsx";
 import BirthdayCard from "./BirthdayCard.astro";
 import PuzzleRomantico from "./Puzzle.jsx";
 ---
@@ -13,9 +12,9 @@ import PuzzleRomantico from "./Puzzle.jsx";
 		<div class="content">
 			<Particles />
 			<RomanticSwiper client:load />
-			<!-- <BirthdayMessage client:load /> -->
-			<BirthdayCard />
 			<PuzzleRomantico client:load />
+
+			<BirthdayCard />
 		</div>
 		<div class="side-border"></div>
 	</div>
@@ -41,6 +40,7 @@ import PuzzleRomantico from "./Puzzle.jsx";
 			display: flex;
 			justify-content: center;
 			flex-direction: column;
+			align-items: center;
 			flex: 1;
 			min-height: 100%;
 			position: relative;

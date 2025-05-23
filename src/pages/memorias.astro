@@ -1,0 +1,174 @@
+---
+import Layout from "../layouts/Layout.astro";
+import GridMemorias from "../components/GridMemorias.astro";
+import Header from "../components/Header.astro";
+
+const fotos = [
+	{
+		src: "/images/foto1.jpg",
+		titulo: "Nuestro primer café",
+		mensaje:
+			"Ese día especial cuando todo comenzó. El aroma del café se mezclaba con tu perfume, y supe que era el inicio de algo hermoso.",
+		fecha: "14 de Marzo, 2023",
+	},
+	{
+		src: "/images/foto2.jpg",
+		titulo: "Paseo en la playa",
+		mensaje:
+			"Caminamos descalzos por la arena mientras el sol se ocultaba. Tus risas se mezclaban con el sonido de las olas.",
+		fecha: "2 de Mayo, 2023",
+	},
+	{
+		src: "/images/foto3.jpg",
+		titulo: "Lluvia inesperada",
+		mensaje:
+			"Nos refugiamos bajo aquel pequeño techo, riendo mientras la lluvia caía. Fue cuando me di cuenta de que contigo cualquier momento era perfecto.",
+		fecha: "18 de Junio, 2023",
+	},
+	{
+		src: "/images/foto4.jpg",
+		titulo: "Picnic en el parque",
+		mensaje:
+			"Flores silvestres, tu sonrisa y una manta sobre el césped. El tiempo se detuvo ese día dorado de verano.",
+		fecha: "25 de Julio, 2023",
+	},
+	{
+		src: "/images/foto5.jpg",
+		titulo: "Concierto bajo las estrellas",
+		mensaje:
+			"La música llenaba el aire y tú bailabas con los ojos cerrados. En ese momento supe que eras mi melodía favorita.",
+		fecha: "12 de Agosto, 2023",
+	},
+	{
+		src: "/images/foto6.jpg",
+		titulo: "Hojas de otoño",
+		mensaje:
+			"Pateamos las hojas doradas y naranjas mientras el viento jugaba con tu cabello. El otoño nunca fue tan cálido.",
+		fecha: "30 de Septiembre, 2023",
+	},
+	{
+		src: "/images/foto7.jpg",
+		titulo: "Primera nevada",
+		mensaje:
+			"Copos blancos caían suavemente mientras construíamos nuestro primer muñeco de nieve juntos. Tu risa calentaba el aire frío.",
+		fecha: "15 de Diciembre, 2023",
+	},
+	{
+		src: "/images/foto8.jpg",
+		titulo: "Año nuevo",
+		mensaje:
+			"Fuegos artificiales iluminaban el cielo, pero yo solo tenía ojos para ti. Mi deseo se había cumplido: tenerte a mi lado.",
+		fecha: "31 de Diciembre, 2023",
+	},
+	{
+		src: "/images/foto9.jpg",
+		titulo: "San Valentín",
+		mensaje:
+			"Rosas rojas y chocolate, pero tu sonrisa era el regalo más dulce. Ese día me atreví a decirte cuánto te amo.",
+		fecha: "14 de Febrero, 2024",
+	},
+	{
+		src: "/images/foto10.jpg",
+		titulo: "Jardín de primavera",
+		mensaje:
+			"Flores de cerezo caían como confeti rosa. Dijiste que era mágico, pero la verdadera magia eras tú.",
+		fecha: "22 de Marzo, 2024",
+	},
+	{
+		src: "/images/foto11.jpg",
+		titulo: "Feria del pueblo",
+		mensaje:
+			"Algodón de azúcar, juegos y tu mano en la mía. Ganaste ese oso de peluche que aún guardas con cariño.",
+		fecha: "10 de Mayo, 2024",
+	},
+	{
+		src: "/images/foto12.jpg",
+		titulo: "Atardecer en la montaña",
+		mensaje:
+			"Subimos hasta la cima para ver el mundo desde arriba. Pero la vista más hermosa eras tú a mi lado.",
+		fecha: "3 de Julio, 2024",
+	},
+	{
+		src: "/images/foto13.jpg",
+		titulo: "Cocina en casa",
+		mensaje:
+			"Harina por todas partes y risas sin parar. Quemamos las galletas, pero creamos el recuerdo más dulce.",
+		fecha: "20 de Agosto, 2024",
+	},
+	{
+		src: "/images/foto14.jpg",
+		titulo: "Biblioteca secreta",
+		mensaje:
+			"Entre libros antiguos y luz dorada encontramos nuestro rincón especial. Leíste poemas mientras yo me perdía en tus ojos.",
+		fecha: "5 de Octubre, 2024",
+	},
+	{
+		src: "/images/foto15.jpg",
+		titulo: "Mercado navideño",
+		mensaje:
+			"Luces cálidas, canela en el aire y tu mano en la mía. El invierno nunca fue tan acogedor como contigo.",
+		fecha: "8 de Diciembre, 2024",
+	},
+	{
+		src: "/images/foto16.jpg",
+		titulo: "Nuestro lugar favorito",
+		mensaje:
+			"Volvimos al café donde todo comenzó. Mismas sonrisas, mismo amor, pero ahora más fuerte que nunca.",
+		fecha: "14 de Enero, 2025",
+	},
+];
+---
+
+<Layout title="Nuestras Memorias">
+	<Header />
+	<main>
+		<div class="page-header scroll-animate">
+			<h1>💕 Nuestras Memorias 💕</h1>
+			<p>Cada foto cuenta una historia, cada historia es un tesoro</p>
+		</div>
+		<GridMemorias fotos={fotos} />
+	</main>
+</Layout>
+
+<style>
+	main {
+		min-height: 100vh;
+		background: linear-gradient(135deg, #ffeef8 0%, #fff0f5 50%, #fce4ec 100%);
+		padding-bottom: 2rem;
+	}
+
+	.page-header {
+		text-align: center;
+		padding: 3rem 2rem 2rem;
+		background: rgba(255, 255, 255, 0.7);
+		backdrop-filter: blur(10px);
+		margin-bottom: 2rem;
+	}
+
+	.page-header h1 {
+		font-size: 3rem;
+		background: linear-gradient(45deg, #ff6b9d, #ff8a80, #ffab91);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		margin-bottom: 1rem;
+		font-family: "Pacifico", cursive;
+		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
+
+	.page-header p {
+		font-size: 1.2rem;
+		color: #666;
+		font-style: italic;
+		opacity: 0.8;
+	}
+
+	@media (max-width: 768px) {
+		.page-header h1 {
+			font-size: 2rem;
+		}
+
+		.page-header p {
+			font-size: 1rem;
+		}
+	}
+</style>

@@ -1,0 +1,536 @@
+---
+const { fotos } = Astro.props;
+---
+
+<div class="memorias-container">
+	<div class="grid scroll-animate" id="memorias-grid">
+		{
+			fotos.map((foto, index) => (
+				<div class="memoria-card scroll-animate" data-index={index}>
+					<div class="card-inner">
+						<div class="card-front">
+							<img src={foto.src} alt={foto.titulo} />
+							<div class="card-overlay">
+								<div class="heart-icon">💕</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			))
+		}
+	</div>
+
+	<!-- Modal para mostrar la memoria expandida -->
+	<div class="modal-overlay" id="modal-overlay">
+		<div class="modal-content" id="modal-content">
+			<button class="close-btn" id="close-btn">
+				<svg
+					width="24"
+					height="24"
+					viewBox="0 0 24 24"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M18 6L6 18M6 6L18 18"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"></path>
+				</svg>
+			</button>
+
+			<div class="modal-card">
+				<div class="modal-image">
+					<img id="modal-img" src="" alt="" />
+				</div>
+				<div class="modal-info">
+					<div class="modal-date" id="modal-date"></div>
+					<h2 class="modal-title" id="modal-title"></h2>
+					<p class="modal-message" id="modal-message"></p>
+					<div class="decorative-hearts">
+						<span>💕</span>
+						<span>💖</span>
+						<span>💕</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.memorias-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 2rem;
+		padding: 2rem 0;
+	}
+
+	@media (min-width: 768px) {
+		.grid {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+
+	.memoria-card {
+		perspective: 1000px;
+		cursor: pointer;
+		transition: transform 0.3s ease;
+	}
+
+	.memoria-card:hover {
+		transform: translateY(-10px);
+	}
+
+	.card-inner {
+		width: 100%;
+		aspect-ratio: 1 / 1;
+		position: relative;
+		transform-style: preserve-3d;
+		transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+		border-radius: 20px;
+		box-shadow: 0 10px 30px rgba(255, 107, 157, 0.2);
+		overflow: hidden;
+	}
+
+	.card-front {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		backface-visibility: hidden;
+		border-radius: 20px;
+		overflow: hidden;
+		background: linear-gradient(45deg, #ffeef8, #fff0f5);
+	}
+
+	.card-front img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.6s ease;
+	}
+
+	.memoria-card:hover .card-front img {
+		transform: scale(1.1);
+	}
+
+	.card-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: linear-gradient(
+			45deg,
+			rgba(255, 107, 157, 0.1),
+			rgba(255, 138, 128, 0.1)
+		);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 0;
+		transition: opacity 0.3s ease;
+	}
+
+	.memoria-card:hover .card-overlay {
+		opacity: 1;
+	}
+
+	.heart-icon {
+		font-size: 3rem;
+		filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+		animation: heartbeat 1.5s ease-in-out infinite;
+	}
+
+	@keyframes heartbeat {
+		0%,
+		100% {
+			transform: scale(1);
+		}
+		50% {
+			transform: scale(1.1);
+		}
+	}
+
+	/* Modal Styles */
+	.modal-overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0, 0, 0, 0.8);
+		backdrop-filter: blur(10px);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 1000;
+		opacity: 0;
+		visibility: hidden;
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.modal-overlay.active {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.modal-content {
+		max-width: 90vw;
+		max-height: 90vh;
+		position: relative;
+		transform: scale(0.8) translateY(50px);
+		transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.modal-overlay.active .modal-content {
+		transform: scale(1) translateY(0);
+	}
+
+	.close-btn {
+		position: absolute;
+		top: -50px;
+		right: 0;
+		background: rgba(255, 255, 255, 0.2);
+		border: none;
+		border-radius: 50%;
+		width: 40px;
+		height: 40px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		color: white;
+		transition: all 0.3s ease;
+		backdrop-filter: blur(10px);
+	}
+
+	.close-btn:hover {
+		background: rgba(255, 255, 255, 0.3);
+		transform: scale(1.1);
+	}
+
+	.modal-card {
+		background: white;
+		border-radius: 25px;
+		overflow: hidden;
+		box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+		display: flex;
+		min-height: 400px;
+		max-width: 800px;
+		animation: modalSlideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	@keyframes modalSlideIn {
+		from {
+			transform: rotateY(-90deg);
+			opacity: 0;
+		}
+		to {
+			transform: rotateY(0deg);
+			opacity: 1;
+		}
+	}
+
+	.modal-image {
+		flex: 1;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.modal-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.modal-info {
+		flex: 1;
+		padding: 3rem;
+		background: linear-gradient(135deg, #ffeef8 0%, #fff0f5 50%, #fce4ec 100%);
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+		position: relative;
+	}
+
+	.modal-date {
+		color: #ff6b9d;
+		font-size: 0.9rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		margin-bottom: 0.5rem;
+		opacity: 0.8;
+	}
+
+	.modal-title {
+		font-size: 2rem;
+		color: #333;
+		margin-bottom: 1rem;
+		font-family: "Pacifico", cursive;
+		background: linear-gradient(45deg, #ff6b9d, #ff8a80);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	.modal-message {
+		color: #666;
+		line-height: 1.8;
+		font-size: 1.1rem;
+		margin-bottom: 2rem;
+		font-style: italic;
+	}
+
+	.decorative-hearts {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+		font-size: 1.5rem;
+		animation: gentleFloat 3s ease-in-out infinite;
+	}
+
+	.decorative-hearts span:nth-child(2) {
+		animation-delay: 0.5s;
+	}
+
+	.decorative-hearts span:nth-child(3) {
+		animation-delay: 1s;
+	}
+
+	@keyframes gentleFloat {
+		0%,
+		100% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-10px);
+		}
+	}
+
+	/* Responsive Design */
+	@media (max-width: 768px) {
+		.modal-card {
+			flex-direction: column;
+			max-width: 95vw;
+			max-height: 95vh;
+		}
+
+		.modal-info {
+			padding: 2rem 1.5rem;
+		}
+
+		.modal-title {
+			font-size: 1.5rem;
+		}
+
+		.modal-message {
+			font-size: 1rem;
+		}
+
+		.close-btn {
+			top: -40px;
+			right: 10px;
+		}
+	}
+
+	/* Floating hearts animation for background */
+	.memorias-container::before {
+		content: "";
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-image: radial-gradient(
+				circle at 20% 80%,
+				rgba(255, 107, 157, 0.1) 0%,
+				transparent 50%
+			),
+			radial-gradient(
+				circle at 80% 20%,
+				rgba(255, 138, 128, 0.1) 0%,
+				transparent 50%
+			),
+			radial-gradient(
+				circle at 40% 40%,
+				rgba(252, 228, 236, 0.1) 0%,
+				transparent 50%
+			);
+		pointer-events: none;
+		z-index: -1;
+	}
+</style>
+
+<script>
+	// Script para manejar la funcionalidad del modal
+	document.addEventListener("DOMContentLoaded", function () {
+		const fotos = [
+			{
+				src: "/images/foto1.jpg",
+				titulo: "Nuestro primer café",
+				mensaje:
+					"Ese día especial cuando todo comenzó. El aroma del café se mezclaba con tu perfume, y supe que era el inicio de algo hermoso.",
+				fecha: "14 de Marzo, 2023",
+			},
+			{
+				src: "/images/foto2.jpg",
+				titulo: "Paseo en la playa",
+				mensaje:
+					"Caminamos descalzos por la arena mientras el sol se ocultaba. Tus risas se mezclaban con el sonido de las olas.",
+				fecha: "2 de Mayo, 2023",
+			},
+			{
+				src: "/images/foto3.jpg",
+				titulo: "Lluvia inesperada",
+				mensaje:
+					"Nos refugiamos bajo aquel pequeño techo, riendo mientras la lluvia caía. Fue cuando me di cuenta de que contigo cualquier momento era perfecto.",
+				fecha: "18 de Junio, 2023",
+			},
+			{
+				src: "/images/foto4.jpg",
+				titulo: "Picnic en el parque",
+				mensaje:
+					"Flores silvestres, tu sonrisa y una manta sobre el césped. El tiempo se detuvo ese día dorado de verano.",
+				fecha: "25 de Julio, 2023",
+			},
+			{
+				src: "/images/foto5.jpg",
+				titulo: "Concierto bajo las estrellas",
+				mensaje:
+					"La música llenaba el aire y tú bailabas con los ojos cerrados. En ese momento supe que eras mi melodía favorita.",
+				fecha: "12 de Agosto, 2023",
+			},
+			{
+				src: "/images/foto6.jpg",
+				titulo: "Hojas de otoño",
+				mensaje:
+					"Pateamos las hojas doradas y naranjas mientras el viento jugaba con tu cabello. El otoño nunca fue tan cálido.",
+				fecha: "30 de Septiembre, 2023",
+			},
+			{
+				src: "/images/foto7.jpg",
+				titulo: "Primera nevada",
+				mensaje:
+					"Copos blancos caían suavemente mientras construíamos nuestro primer muñeco de nieve juntos. Tu risa calentaba el aire frío.",
+				fecha: "15 de Diciembre, 2023",
+			},
+			{
+				src: "/images/foto8.jpg",
+				titulo: "Año nuevo",
+				mensaje:
+					"Fuegos artificiales iluminaban el cielo, pero yo solo tenía ojos para ti. Mi deseo se había cumplido: tenerte a mi lado.",
+				fecha: "31 de Diciembre, 2023",
+			},
+			{
+				src: "/images/foto9.jpg",
+				titulo: "San Valentín",
+				mensaje:
+					"Rosas rojas y chocolate, pero tu sonrisa era el regalo más dulce. Ese día me atreví a decirte cuánto te amo.",
+				fecha: "14 de Febrero, 2024",
+			},
+			{
+				src: "/images/foto10.jpg",
+				titulo: "Jardín de primavera",
+				mensaje:
+					"Flores de cerezo caían como confeti rosa. Dijiste que era mágico, pero la verdadera magia eras tú.",
+				fecha: "22 de Marzo, 2024",
+			},
+			{
+				src: "/images/foto11.jpg",
+				titulo: "Feria del pueblo",
+				mensaje:
+					"Algodón de azúcar, juegos y tu mano en la mía. Ganaste ese oso de peluche que aún guardas con cariño.",
+				fecha: "10 de Mayo, 2024",
+			},
+			{
+				src: "/images/foto12.jpg",
+				titulo: "Atardecer en la montaña",
+				mensaje:
+					"Subimos hasta la cima para ver el mundo desde arriba. Pero la vista más hermosa eras tú a mi lado.",
+				fecha: "3 de Julio, 2024",
+			},
+			{
+				src: "/images/foto13.jpg",
+				titulo: "Cocina en casa",
+				mensaje:
+					"Harina por todas partes y risas sin parar. Quemamos las galletas, pero creamos el recuerdo más dulce.",
+				fecha: "20 de Agosto, 2024",
+			},
+			{
+				src: "/images/foto14.jpg",
+				titulo: "Biblioteca secreta",
+				mensaje:
+					"Entre libros antiguos y luz dorada encontramos nuestro rincón especial. Leíste poemas mientras yo me perdía en tus ojos.",
+				fecha: "5 de Octubre, 2024",
+			},
+			{
+				src: "/images/foto15.jpg",
+				titulo: "Mercado navideño",
+				mensaje:
+					"Luces cálidas, canela en el aire y tu mano en la mía. El invierno nunca fue tan acogedor como contigo.",
+				fecha: "8 de Diciembre, 2024",
+			},
+			{
+				src: "/images/foto16.jpg",
+				titulo: "Nuestro lugar favorito",
+				mensaje:
+					"Volvimos al café donde todo comenzó. Mismas sonrisas, mismo amor, pero ahora más fuerte que nunca.",
+				fecha: "14 de Enero, 2025",
+			},
+		];
+
+		const cards = document.querySelectorAll(".memoria-card");
+		const modal = document.getElementById("modal-overlay");
+		const modalImg = document.getElementById("modal-img");
+		const modalTitle = document.getElementById("modal-title");
+		const modalMessage = document.getElementById("modal-message");
+		const modalDate = document.getElementById("modal-date");
+		const closeBtn = document.getElementById("close-btn");
+
+		// Abrir modal al hacer click en una tarjeta
+		cards.forEach((card, index) => {
+			card.addEventListener("click", () => {
+				const foto = fotos[index];
+
+				modalImg.src = foto.src;
+				modalImg.alt = foto.titulo;
+				modalTitle.textContent = foto.titulo;
+				modalMessage.textContent = foto.mensaje;
+				modalDate.textContent = foto.fecha;
+
+				modal.classList.add("active");
+				document.body.style.overflow = "hidden";
+			});
+		});
+
+		// Cerrar modal
+		const closeModal = () => {
+			modal.classList.remove("active");
+			document.body.style.overflow = "auto";
+		};
+
+		closeBtn.addEventListener("click", closeModal);
+
+		// Cerrar modal al hacer click en el overlay
+		modal.addEventListener("click", (e) => {
+			if (e.target === modal) {
+				closeModal();
+			}
+		});
+
+		// Cerrar modal con la tecla Escape
+		document.addEventListener("keydown", (e) => {
+			if (e.key === "Escape" && modal.classList.contains("active")) {
+				closeModal();
+			}
+		});
+	});
+</script>
