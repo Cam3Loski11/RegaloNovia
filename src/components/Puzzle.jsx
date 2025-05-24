@@ -113,7 +113,7 @@ export default function PuzzleImagen() {
   // Renderizar el componente
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-pink-50 m-6 rounded-xl w-[50%]">
-      <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-pink-600 text-center">
+      <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-pink-600 text-center" style={{ fontFamily: "Pacifico, cursive" }}>
         Completa el Puzzle de Cumpleaños
       </h2>
       
