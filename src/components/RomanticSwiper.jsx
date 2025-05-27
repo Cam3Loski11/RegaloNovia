@@ -14,12 +14,13 @@ import "swiper/css/navigation";
 import "./RomanticSwiper.css";
 
 const images = [
-  "../../public/carrusel-imgs/foto1.jpeg",
-  "../../public/carrusel-imgs/foto2.jpeg",
-  "../../public/carrusel-imgs/foto3.jpeg",
-  "../../public/carrusel-imgs/foto4.jpeg",
-  "../../public/carrusel-imgs/foto5.jpeg",
+  "/carrusel-imgs/foto1.jpeg",
+  "/carrusel-imgs/foto2.jpeg",
+  "/carrusel-imgs/foto3.jpeg",
+  "/carrusel-imgs/foto4.jpeg",
+  "/carrusel-imgs/foto5.jpeg",
 ];
+
 
 export default function RomanticSwiper() {
   return (

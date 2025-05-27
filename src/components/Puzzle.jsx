@@ -161,7 +161,7 @@ export default function PuzzleImagen() {
                   <div 
                     className="absolute w-full h-full"
                     style={{
-                      backgroundImage: 'url("src/assets/puzzleBase.jpg")',
+                      backgroundImage: 'url("public/puzzleBase.jpg")',
                       backgroundSize: '300% 300%',
                       backgroundPosition: `${imagePosX}% ${imagePosY}%`,
                       backgroundRepeat: 'no-repeat',
@@ -184,7 +184,7 @@ export default function PuzzleImagen() {
         <div className="mt-4 sm:mt-6 mx-auto">
           <div className="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-2 rounded-lg overflow-hidden">
             <img 
-              src="src/assets/puzzleBase.jpg" 
+              src="public/puzzleBase.jpg" 
               alt="Imagen objetivo" 
               className="w-full h-full object-cover"
             />
