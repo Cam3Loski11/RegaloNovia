@@ -3,13 +3,25 @@ const { fotos } = Astro.props;
 ---
 
 <div class="memorias-container">
-	<div class="grid scroll-animate" id="memorias-grid">
+	<div class="grid" id="memorias-grid">
 		{
 			fotos.map((foto, index) => (
-				<div class="memoria-card scroll-animate" data-index={index}>
+				<div class="memoria-card" data-index={index}>
 					<div class="card-inner">
 						<div class="card-front">
-							<img src={foto.src} alt={foto.titulo} />
+							<div class="image-container">
+								<img
+									data-src={foto.src}
+									alt={foto.titulo}
+									class="lazy-image"
+									loading="lazy"
+									decoding="async"
+								/>
+								<div class="image-placeholder">
+									<div class="placeholder-heart">💕</div>
+									<div class="loading-spinner" />
+								</div>
+							</div>
 							<div class="card-overlay">
 								<div class="heart-icon">💕</div>
 							</div>
@@ -41,7 +53,10 @@ const { fotos } = Astro.props;
 
 			<div class="modal-card">
 				<div class="modal-image">
-					<img id="modal-img" src="" alt="" />
+					<img id="modal-img" src="" alt="" loading="eager" decoding="sync" />
+					<div class="modal-image-loading" id="modal-loading">
+						<div class="modal-spinner"></div>
+					</div>
 				</div>
 				<div class="modal-info">
 					<div class="modal-date" id="modal-date"></div>
@@ -109,15 +124,181 @@ const { fotos } = Astro.props;
 		background: linear-gradient(45deg, #ffeef8, #fff0f5);
 	}
 
-	.card-front img {
+	.image-container {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+	}
+
+	.lazy-image {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		transition: transform 0.6s ease;
+		transition: all 0.6s ease;
+		opacity: 0;
+		transform: scale(1.1);
 	}
 
-	.memoria-card:hover .card-front img {
+	.lazy-image.loaded {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	.lazy-image.error {
+		opacity: 0.3;
+	}
+
+	.memoria-card:hover .lazy-image.loaded {
 		transform: scale(1.1);
+	}
+
+	.image-placeholder {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: linear-gradient(45deg, #ffeef8, #fff0f5);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		transition: opacity 0.5s ease;
+		overflow: hidden;
+	}
+
+	.image-placeholder::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(
+			90deg,
+			transparent,
+			rgba(255, 255, 255, 0.4) 20%,
+			rgba(255, 255, 255, 0.8) 50%,
+			rgba(255, 255, 255, 0.4) 80%,
+			transparent
+		);
+		animation: shimmer 2s infinite ease-in-out;
+	}
+
+	@keyframes shimmer {
+		0% {
+			left: -100%;
+		}
+		100% {
+			left: 100%;
+		}
+	}
+
+	.lazy-image.loaded + .image-placeholder {
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.placeholder-heart {
+		font-size: 2rem;
+		margin-bottom: 1rem;
+		animation: placeholderPulse 2s ease-in-out infinite;
+		z-index: 2;
+		position: relative;
+	}
+
+	.loading-spinner {
+		width: 30px;
+		height: 30px;
+		border: 3px solid rgba(255, 107, 157, 0.3);
+		border-top: 3px solid #ff6b9d;
+		border-radius: 50%;
+		animation: spin 1s linear infinite;
+		z-index: 2;
+		position: relative;
+	}
+
+	/* Skeleton loading effect más avanzado */
+	.memoria-card.loading .image-placeholder {
+		background: linear-gradient(
+			45deg,
+			#f0f0f0 25%,
+			transparent 25%,
+			transparent 50%,
+			#f0f0f0 50%,
+			#f0f0f0 75%,
+			transparent 75%,
+			transparent
+		);
+		background-size: 20px 20px;
+		animation: skeletonMove 2s linear infinite;
+	}
+
+	@keyframes skeletonMove {
+		0% {
+			background-position: 0 0;
+		}
+		100% {
+			background-position: 20px 20px;
+		}
+	}
+
+	/* Efecto de aparición suave cuando la imagen carga */
+	.lazy-image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+		opacity: 0;
+		transform: scale(1.05);
+		filter: blur(5px);
+	}
+
+	.lazy-image.loaded {
+		opacity: 1;
+		transform: scale(1);
+		filter: blur(0px);
+	}
+
+	.lazy-image.error {
+		opacity: 0.3;
+		filter: grayscale(100%);
+	}
+
+	/* Efecto de respiración para el corazón */
+	@keyframes placeholderPulse {
+		0%,
+		100% {
+			opacity: 0.6;
+			transform: scale(1);
+		}
+		50% {
+			opacity: 1;
+			transform: scale(1.15);
+		}
+	}
+
+	@keyframes spin {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+
+	/* Variaciones del shimmer para diferentes elementos */
+	.memoria-card:nth-child(even) .image-placeholder::before {
+		animation-delay: 0.5s;
+	}
+
+	.memoria-card:nth-child(3n) .image-placeholder::before {
+		animation-delay: 1s;
+	}
+
+	.memoria-card:nth-child(4n) .image-placeholder::before {
+		animation-delay: 1.5s;
 	}
 
 	.card-overlay {
@@ -248,6 +429,56 @@ const { fotos } = Astro.props;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		transition: opacity 0.3s ease;
+	}
+
+	.modal-image-loading {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: linear-gradient(45deg, #ffeef8, #fff0f5);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 1;
+		transition: opacity 0.5s ease;
+		overflow: hidden;
+	}
+
+	.modal-image-loading::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(
+			90deg,
+			transparent,
+			rgba(255, 255, 255, 0.3) 20%,
+			rgba(255, 255, 255, 0.6) 50%,
+			rgba(255, 255, 255, 0.3) 80%,
+			transparent
+		);
+		animation: shimmer 2.5s infinite ease-in-out;
+	}
+
+	.modal-image-loading.hidden {
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.modal-spinner {
+		width: 40px;
+		height: 40px;
+		border: 4px solid rgba(255, 107, 157, 0.3);
+		border-top: 4px solid #ff6b9d;
+		border-radius: 50%;
+		animation: spin 1s linear infinite;
+		z-index: 2;
+		position: relative;
 	}
 
 	.modal-info {
@@ -275,7 +506,7 @@ const { fotos } = Astro.props;
 		font-size: 2rem;
 		color: #333;
 		margin-bottom: 1rem;
-		font-family: "Pacifico", cursive;
+		font-family: "Georgia", serif;
 		background: linear-gradient(45deg, #ff6b9d, #ff8a80);
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
@@ -370,64 +601,64 @@ const { fotos } = Astro.props;
 </style>
 
 <script>
-	// Script para manejar la funcionalidad del modal
+	// Script para manejar la funcionalidad del modal y lazy loading
 	document.addEventListener("DOMContentLoaded", function () {
 		const fotos = [
 			{
 				src: "/images/foto1.jpg",
-				titulo: "Nuestro primer café",
+				titulo: "Cirque du Soleil, Orlando",
 				mensaje:
-					"Ese día especial cuando todo comenzó. El aroma del café se mezclaba con tu perfume, y supe que era el inicio de algo hermoso.",
-				fecha: "14 de Marzo, 2023",
+					"Un evento que culmino un dia lleno de alegria, cuando creia que nada iba a mejorar dicho dia, ese circo fue como la cereza a un pastel exquisito. Nuestro primer circo fue un momento inigualable para nosotros.",
+				fecha: "5 de Abril, 2025",
 			},
 			{
 				src: "/images/foto2.jpg",
-				titulo: "Paseo en la playa",
+				titulo: "Sea World, Orlando",
 				mensaje:
-					"Caminamos descalzos por la arena mientras el sol se ocultaba. Tus risas se mezclaban con el sonido de las olas.",
-				fecha: "2 de Mayo, 2023",
+					"Sea World Orlando fue un viaje inolvidable, donde pudimos ver animales increibles y disfrutar de la naturaleza marina. Nuestro recuerdo de este lugar esta lleno de experiencias nuevas y emocionantes.",
+				fecha: "6 de Abril, 2025",
 			},
 			{
 				src: "/images/foto3.jpg",
-				titulo: "Lluvia inesperada",
+				titulo: "Animal Kingdom lodge, Orlando",
 				mensaje:
-					"Nos refugiamos bajo aquel pequeño techo, riendo mientras la lluvia caía. Fue cuando me di cuenta de que contigo cualquier momento era perfecto.",
-				fecha: "18 de Junio, 2023",
+					"Ese momento fue parte de una travesia inolvidable, precisamente este momento fue hermoso, ya que vimos animales exoticos y disfrutamos de la naturaleza",
+				fecha: "5 de Abril, 2025",
 			},
 			{
 				src: "/images/foto4.jpg",
-				titulo: "Picnic en el parque",
+				titulo: "Primer cita en el parque",
 				mensaje:
-					"Flores silvestres, tu sonrisa y una manta sobre el césped. El tiempo se detuvo ese día dorado de verano.",
-				fecha: "25 de Julio, 2023",
+					"Hay demasiado que decir de este dia, pero mis palabras han de limitarse. Tu presencia en mi vida ha sido una experiencia inolvidable, y ahora estoy aqui para recordarlas toda mi existencia. Todo lo que tenemos hoy, fue gracias a lo que construimos ese primer dia.",
+				fecha: "26 de Noviembre, 2024",
 			},
 			{
 				src: "/images/foto5.jpg",
-				titulo: "Concierto bajo las estrellas",
+				titulo: "Museo de ciencias, Planetario",
 				mensaje:
-					"La música llenaba el aire y tú bailabas con los ojos cerrados. En ese momento supe que eras mi melodía favorita.",
-				fecha: "12 de Agosto, 2023",
+					"En ese momento aprendimos cosas nuevas, y a pesar de que a ti no te apasiona tanto el espacio como a mi, tuvimos un momento agradable, donde ambos nos divertimos conociendo nuestro universo.",
+				fecha: "10 de Mayo, 2025",
 			},
 			{
 				src: "/images/foto6.jpg",
-				titulo: "Hojas de otoño",
+				titulo: "Museo de ciencias, Acuario",
 				mensaje:
-					"Pateamos las hojas doradas y naranjas mientras el viento jugaba con tu cabello. El otoño nunca fue tan cálido.",
-				fecha: "30 de Septiembre, 2023",
+					"Aunque no fue nuestro primer acuario, me diverti mucho en ese momento experimentando algo nuevo, ya que tocamos animales marinos, se sintio raro, pero es bueno probar nuevas cosas.",
+				fecha: "10 de Mayo, 2025",
 			},
 			{
 				src: "/images/foto7.jpg",
-				titulo: "Primera nevada",
+				titulo: "El mejor cumpleaños de mi vida",
 				mensaje:
-					"Copos blancos caían suavemente mientras construíamos nuestro primer muñeco de nieve juntos. Tu risa calentaba el aire frío.",
-				fecha: "15 de Diciembre, 2023",
+					"De los mejores dias de mi vida, la pase demasiado bien, tanto que en la noche no paraba de expresar lo hermoso que me hiciste sentir, fue un dia que jamas olvidare, siempre lo recordare y gritare a voces que ese cumpleaños es el mejor de mi vida, y todo gracias a ti. Muchas gracias por eso, mi amor.",
+				fecha: "11 de Mayo, 2025",
 			},
 			{
 				src: "/images/foto8.jpg",
-				titulo: "Año nuevo",
+				titulo: "Flamingo Gardens, Fort Lauderdale",
 				mensaje:
-					"Fuegos artificiales iluminaban el cielo, pero yo solo tenía ojos para ti. Mi deseo se había cumplido: tenerte a mi lado.",
-				fecha: "31 de Diciembre, 2023",
+					"Un dia muy hermoso, donde conectamos con la naturaleza, vimos animales nuevos y aprendimos cosas sobre la naturaleza y el comportamiento de ciertos animales, esta foto es muy iconica y me gusto mucho.",
+				fecha: "26 de Abril, 2025",
 			},
 			{
 				src: "/images/foto9.jpg",
@@ -487,12 +718,105 @@ const { fotos } = Astro.props;
 			},
 		];
 
+		// Cache de imágenes cargadas
+		const imageCache = new Map();
+
+		// Precargar imágenes críticas (primeras 4)
+		const preloadCriticalImages = () => {
+			fotos.slice(0, 4).forEach((foto) => {
+				const link = document.createElement("link");
+				link.rel = "preload";
+				link.as = "image";
+				link.href = foto.src;
+				document.head.appendChild(link);
+			});
+		};
+
+		// Función para cargar imagen con lazy loading y efectos
+		const loadImage = (img, src) => {
+			return new Promise((resolve, reject) => {
+				// Verificar cache primero
+				if (imageCache.has(src)) {
+					img.src = src;
+					// Pequeño delay para mostrar la transición suave
+					setTimeout(() => {
+						img.classList.add("loaded");
+						resolve();
+					}, 100);
+					return;
+				}
+
+				// Agregar clase de loading a la tarjeta
+				const card = img.closest(".memoria-card");
+				if (card) card.classList.add("loading");
+
+				// Crear nueva imagen para precargar
+				const tempImg = new Image();
+
+				tempImg.onload = () => {
+					imageCache.set(src, true);
+					img.src = src;
+
+					// Simular un pequeño delay para mostrar el efecto de carga
+					// (puedes remover esto si quieres que sea instantáneo)
+					setTimeout(() => {
+						img.classList.add("loaded");
+						if (card) card.classList.remove("loading");
+						resolve();
+					}, 300); // 300ms para ver el efecto shimmer
+				};
+
+				tempImg.onerror = () => {
+					img.classList.add("error");
+					if (card) card.classList.remove("loading");
+					reject();
+				};
+
+				// Simular carga lenta para desarrollo (remover en producción)
+				// setTimeout(() => {
+				//     tempImg.src = src;
+				// }, Math.random() * 1000 + 500);
+
+				tempImg.src = src;
+			});
+		};
+
+		// Intersection Observer para lazy loading
+		const imageObserver = new IntersectionObserver(
+			(entries, observer) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						const img = entry.target;
+						const src = img.dataset.src;
+
+						loadImage(img, src).catch(() => {
+							console.warn(`Failed to load image: ${src}`);
+						});
+
+						observer.unobserve(img);
+					}
+				});
+			},
+			{
+				rootMargin: "50px 0px", // Cargar 50px antes de que sea visible
+				threshold: 0.1,
+			}
+		);
+
+		// Observar todas las imágenes lazy
+		const lazyImages = document.querySelectorAll(".lazy-image");
+		lazyImages.forEach((img) => {
+			imageObserver.observe(img);
+		});
+
+		// Variables del modal
 		const cards = document.querySelectorAll(".memoria-card");
 		const modal = document.getElementById("modal-overlay");
 		const modalImg = document.getElementById("modal-img");
 		const modalTitle = document.getElementById("modal-title");
 		const modalMessage = document.getElementById("modal-message");
 		const modalDate = document.getElementById("modal-date");
+		const modalLoading = document.getElementById("modal-loading");
 		const closeBtn = document.getElementById("close-btn");
 
 		// Abrir modal al hacer click en una tarjeta
@@ -500,14 +824,52 @@ const { fotos } = Astro.props;
 			card.addEventListener("click", () => {
 				const foto = fotos[index];
 
-				modalImg.src = foto.src;
-				modalImg.alt = foto.titulo;
+				// Mostrar modal inmediatamente
+				modal.classList.add("active");
+				document.body.style.overflow = "hidden";
+
+				// Actualizar información de texto inmediatamente
 				modalTitle.textContent = foto.titulo;
 				modalMessage.textContent = foto.mensaje;
 				modalDate.textContent = foto.fecha;
 
-				modal.classList.add("active");
-				document.body.style.overflow = "hidden";
+				// Mostrar loading y cargar imagen
+				modalLoading.classList.remove("hidden");
+				modalImg.style.opacity = "0";
+
+				// Cargar imagen del modal con efecto mejorado
+				const loadModalImage = () => {
+					// Crear imagen temporal para precargar
+					const tempImg = new Image();
+
+					tempImg.onload = () => {
+						modalImg.src = foto.src;
+						modalImg.alt = foto.titulo;
+
+						// Efecto de aparición suave
+						setTimeout(() => {
+							modalImg.style.opacity = "1";
+							modalImg.style.transform = "scale(1)";
+							modalImg.style.filter = "blur(0px)";
+							modalLoading.classList.add("hidden");
+						}, 150);
+					};
+
+					tempImg.onerror = () => {
+						modalLoading.classList.add("hidden");
+						console.warn(`Failed to load modal image: ${foto.src}`);
+					};
+
+					// Preparar imagen modal para la transición
+					modalImg.style.opacity = "0";
+					modalImg.style.transform = "scale(1.1)";
+					modalImg.style.filter = "blur(10px)";
+					modalImg.style.transition = "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)";
+
+					tempImg.src = foto.src;
+				};
+
+				loadModalImage();
 			});
 		});
 
@@ -532,5 +894,29 @@ const { fotos } = Astro.props;
 				closeModal();
 			}
 		});
+
+		// Precargar imágenes críticas al cargar la página
+		preloadCriticalImages();
+
+		// Precargar próximas imágenes cuando el usuario interactúe
+		let interactionStarted = false;
+		const startPreloading = () => {
+			if (interactionStarted) return;
+			interactionStarted = true;
+
+			// Precargar el resto de imágenes gradualmente
+			fotos.slice(4).forEach((foto, index) => {
+				setTimeout(() => {
+					const tempImg = new Image();
+					tempImg.src = foto.src;
+					imageCache.set(foto.src, true);
+				}, index * 200); // 200ms entre cada precarga
+			});
+		};
+
+		// Iniciar precarga en primer hover o scroll
+		document.addEventListener("scroll", startPreloading, { once: true });
+		document.addEventListener("mouseover", startPreloading, { once: true });
+		document.addEventListener("touchstart", startPreloading, { once: true });
 	});
 </script>
