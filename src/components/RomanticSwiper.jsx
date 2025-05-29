@@ -14,11 +14,13 @@ import "swiper/css/navigation";
 import "./RomanticSwiper.css";
 
 const images = [
+  "/carrusel-imgs/foto7.jpeg",
   "/carrusel-imgs/foto1.jpeg",
   "/carrusel-imgs/foto2.jpeg",
   "/carrusel-imgs/foto3.jpeg",
   "/carrusel-imgs/foto4.jpeg",
   "/carrusel-imgs/foto5.jpeg",
+  // "/carrusel-imgs/foto6.jpeg",
 ];
 
 
@@ -36,7 +38,7 @@ export default function RomanticSwiper() {
       {/* Título del carrusel */}
       <div className="carousel-header">
         <FontAwesomeIcon icon={faHeart} className="heart-icon" />
-        <h3 className="carousel-title">Tus Momentos</h3>
+        <h3 className="carousel-title">Tus Mejores Momentos</h3>
       </div>
 
       {/* Swiper mejorado */}
